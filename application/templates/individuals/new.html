@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('individuals_create') }}">
+  <input type="text" name="nickname"/>
+  <input type="text" name="level"/>
+  <input type="submit" value="Add a new individual"/>
+</form>
+{% endblock %}

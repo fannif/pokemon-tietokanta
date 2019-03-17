@@ -1,14 +1,14 @@
-# pokemon-tietokanta
+# Pokemon-tietokanta
 
 Harjoitustyö on sovellus pokemonien kirjaamista ja tarkastelua varten. Käyttäjät voivat luoda sovellukseen tilin, minkä jälkeen he voivat aina sisään kirjautuessaan katsella, lisätä ja muokata nappaamiaan pokemoneja. Käyttäjä voi halutessaan myös muuttaa käyttäjänimeään tai poistaa koko tilinsä.
 
 Kukin pokemon on yhtä tai useampaa tyyppiä, ja useampi pokemon voi olla samaa tyyppiä. Pokemon on aina jotain pokemonlajia, ja yhtä pokemonlajia voi olla useampi pokemon. Tietokannassa on siis erikseen taulu pokemonyksilöille, pokemonlajille, pokemonin tyypille ja käyttäjälle.
 
-Käyttäjä hallinnoi nappaamiaan pokemonyksilöitä. Niitä voi olla kuinka monta tahansa, mutta kuhunkin yksilöön liittyy vain yksi käyttäjä. Käyttäjä voi poistaa tai lisätä pokemoneja tai muuttaa niiden lempinimeä.
+Käyttäjä hallinnoi nappaamiaan pokemonyksilöitä. Niitä voi olla kuinka monta tahansa, mutta kuhunkin yksilöön liittyy vain yksi käyttäjä. Käyttäjä voi poistaa tai lisätä pokemonyksilöitä tai muuttaa niiden lempinimeä.
 Pokemonlajin ja tyypin välillä on monen suhde moneen -yhteys, koska yksi pokemonlaji voi olla montaa tyyppiä, ja samaan tyyppiin voi kuulua monta pokemonlajia.
 
 Käyttäjällä on ainakin käyttäjätunnus ja sähköpostiosoite (ja mahdollisesti salasana).
-Pokemonyksilöllä on ainakin lempinimi ja level, ja kenties nappaamispäivämäärä ja tieto siitä, kuuluuko se suosikkeihin.
+Pokemonyksilöllä on ainakin lempinimi ja level, ja kenties nappaamispäivämäärä (ehkä tieto siitä, kuuluuko se suosikkeihin?).
 Pokemonlajilla on nimi ja kuvaus sekä tieto siitä, onko se legendaarinen pokemon.
 Pokemonin tyypillä on nimi.
 
@@ -19,5 +19,12 @@ Sovellukseen voisi tulla seuraavanlaisia toimintoja:
 - Suosikkipokemonien listaaminen.
 - Legendaaristen pokemonien listaaminen.
 - Pokemonin kehittyminen (pokemonin lajia muutetaan).
-- Pokemonin lempinimen ja levelin muuttaminen, pokemonin poistaminen ja lisääminen (pokemonia lisätessä, jos lajia ei ole vielä tietokannassa, sekin lisätään).
+- Pokemonin lempinimen ja levelin sekä suosikkistatuksen muuttaminen, pokemonin poistaminen ja lisääminen (pokemonia lisätessä, jos lajia tai tyyppejä ei ole vielä tietokannassa, nekin lisätään).
 - Käyttäjä voi luoda tai poistaa tilin tai muokata tietojaan.
+
+Tietokantakaavion luonnos:
+- User((pk) id:Integer, username:String, email:String)
+- Individual((pk) id:Integer, (fk) user_id -> User, (fk) species_id -> Species, nickname:String, level:Integer, caught:Date)
+- Species((pk) id:Integer, name:String, description:String, legendary:Boolean)
+- Type((pk) id:Integer, name:String)
+- SpeciesType((fk) species_id -> Species, (fk) type_id -> Type)
