@@ -7,12 +7,21 @@ from application.individuals.forms import IndividualForm
 @app.route("/individuals", methods=["GET"])
 @login_required
 def individuals_index():
-    return render_template("individuals/list.html", individuals = Individual.query.all())
+    return render_template("individuals/list.html", individuals = Individual.query.filter_by(account_id = current_user.id))
 
 @app.route("/individuals/new/")
 @login_required
 def individuals_form():
     return render_template("individuals/new.html", form = IndividualForm())
+
+@app.route("/individuals/remove/<individual_id>/", methods=["POST"])
+@login_required
+def individuals_remove(individual_id):
+    i = Individual.query.filter_by(id=individual_id).first()
+    db.session.delete(i)
+    db.session.commit()
+
+    return redirect(url_for("individuals_index"))
 
 @app.route("/individuals/<individual_id>/", methods=["POST"])
 @login_required

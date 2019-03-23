@@ -17,7 +17,7 @@ def auth_create():
     db.session().add(a)
     db.session().commit()
 
-    return redirect(url_for("login"))
+    return redirect(url_for("auth_login"))
 
 @app.route("/auth/login", methods = ["GET", "POST"])
 def auth_login():

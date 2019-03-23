@@ -15,7 +15,10 @@
       <td>{{ individual.favourite }}</td>
       <td>
         <form method="POST" action="{{ url_for('individuals_set_favourite', individual_id=individual.id) }}">
-          <input type="submit" value="Favourite/Unfavourite"/>
+          <input name="favourite" type="submit" value="Favourite/Unfavourite"/>
+        </form>
+        <form method="POST" action="{{url_for('individuals_remove', individual_id=individual.id) }}">
+          <input name="remove" type="submit" value="Remove"/>
         </form>
       </td>
     </tr>
