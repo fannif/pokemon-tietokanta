@@ -2,8 +2,42 @@
 
 {% block body %}
 <form method="POST" action="{{ url_for('individuals_create') }}">
-  <input type="text" name="nickname"/>
-  <input type="text" name="level"/>
-  <input type="submit" value="Add a new individual"/>
+  <table>
+    <tr>
+      <td>
+        {{ form.nickname.label }}
+      </td>
+      <td>
+        {{ form.nickname }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.level.label }}
+      </td>
+      <td>
+        {{ form.level }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.level.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.favourite.label }}
+      </td>
+      <td>
+        {{ form.favourite }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <input type="submit" value="Add a new pokemon"/>
+      </td>
+    </tr>
 </form>
 {% endblock %}

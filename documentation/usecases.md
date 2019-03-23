@@ -7,7 +7,7 @@ Kukin pokemon on yhtä tai useampaa tyyppiä, ja useampi pokemon voi olla samaa 
 Käyttäjä hallinnoi nappaamiaan pokemonyksilöitä. Niitä voi olla kuinka monta tahansa, mutta kuhunkin yksilöön liittyy vain yksi käyttäjä. Käyttäjä voi poistaa tai lisätä pokemonyksilöitä tai muuttaa niiden lempinimeä.
 Pokemonlajin ja tyypin välillä on monen suhde moneen -yhteys, koska yksi pokemonlaji voi olla montaa tyyppiä, ja samaan tyyppiin voi kuulua monta pokemonlajia.
 
-Käyttäjällä on ainakin käyttäjätunnus ja sähköpostiosoite (ja mahdollisesti salasana).
+Käyttäjällä on käyttäjätunnus ja salasana.
 Pokemonyksilöllä on ainakin lempinimi ja level, ja nappaamispäivämäärä sekä tieto siitä, kuuluuko se suosikkeihin.
 Pokemonlajilla on nimi ja kuvaus sekä tieto siitä, onko se legendaarinen pokemon.
 Pokemonin tyypillä on nimi.

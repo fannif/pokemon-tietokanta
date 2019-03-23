@@ -7,6 +7,8 @@ class Individual(db.Model):
     level = db.Column(db.Integer, nullable=False)
     favourite = db.Column(db.Boolean, nullable=False)
 
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+
     def __init__(self, nickname, level):
         self.nickname = nickname
         self.level = level
