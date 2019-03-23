@@ -5,6 +5,7 @@ from application.individuals.models import Individual
 from application.individuals.forms import IndividualForm
 
 @app.route("/individuals", methods=["GET"])
+@login_required
 def individuals_index():
     return render_template("individuals/list.html", individuals = Individual.query.all())
 
