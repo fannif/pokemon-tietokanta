@@ -22,8 +22,12 @@ from application.auth import models
 from application.auth import views
 
 from application.types import models
+from application.types.models import Type
 
 from application.species import models
+from application.species import views
+from application.species.models import SpeciesType
+from application.species.models import speciestype
 
 from application.auth.models import User
 from os import urandom
@@ -41,6 +45,29 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 try:
+    db.mapper(SpeciesType, speciestype)
     db.create_all()
 except:
     pass
+
+if not Type.query.all():
+    db.session.add(Type("bug"))
+    db.session.add(Type("dark"))
+    db.session.add(Type("dragon"))
+    db.session.add(Type("electric"))
+    db.session.add(Type("fairy"))
+    db.session.add(Type("fighting"))
+    db.session.add(Type("fire"))
+    db.session.add(Type("flying"))
+    db.session.add(Type("ghost"))
+    db.session.add(Type("grass"))
+    db.session.add(Type("ground"))
+    db.session.add(Type("ice"))
+    db.session.add(Type("normal"))
+    db.session.add(Type("poison"))
+    db.session.add(Type("psychic"))
+    db.session.add(Type("rock"))
+    db.session.add(Type("steel"))
+    db.session.add(Type("water"))
+    db.session.commit()
+

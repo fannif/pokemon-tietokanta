@@ -8,6 +8,7 @@ class Individual(db.Model):
     favourite = db.Column(db.Boolean, nullable=False)
 
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+    species_id = db.Column(db.Integer, db.ForeignKey('species.id'), nullable=False)
 
     def __init__(self, nickname, level):
         self.nickname = nickname

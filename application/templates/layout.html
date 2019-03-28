@@ -8,7 +8,7 @@
   <body>
     {% if current_user.is_authenticated %}
     <p>
-      Logged in as {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Log out</a>
+      Logged in as {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Log out</a>    <a href="{{ url_for('auth_info') }}">Account info</a>
     </p>
     {% else %}
     <a href="{{ url_for('auth_login') }}">Log in</a>
@@ -18,6 +18,7 @@
     <ul>
       <li><a href="{{ url_for('individuals_index') }}">List my pokemon</a></li>
       <li><a href="{{ url_for('individuals_form') }}">Add a new pokemon</a></li>
+      <li><a href="{{ url_for('auth_index') }}">View user list</a><li>
     </ul>
 
     {% block body %}

@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('species_create') }}">
+  <p>
+     Oops! This species of your pokemon does not exist yet in our database. Please tell us more about it.
+  </p>
+  <p>
+     You will have to restart filling the previous form to add your new pokemon after adding this new pokemon species.
+  </p>
+  <table>
+    <tr>
+      <td>
+        {{ form.name.label }}
+      </td>
+      <td>
+        {{ form.name }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.description.label }}
+      </td>
+      <td>
+        {{ form.description }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.legendary.label }}
+      </td>
+      <td>
+        {{ form.legendary }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Select a type for this species<p>
+      </td>
+      <td>
+        {{ form.type1 }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Select a second type for this species<p>
+      </td>
+      <td>
+        {{ form.type2 }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <input type="submit" value="Add a new pokemon species"/>
+      </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

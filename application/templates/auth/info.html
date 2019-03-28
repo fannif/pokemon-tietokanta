@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('auth_change_password') }}">
+  <table>
+    <tr>
+      <td>Your username: </td>
+      <td>{{ current_user.username }}</td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.password.label }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.password }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.password.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="Change password"/>
+      </td>
+    </tr>
+  </table>
+</form>
+  <table>
+    <tr>
+      <td><p></p></td>
+    </tr>
+    <tr>
+      <td>By pressing the button below, you may delete your account. ATTENTION: Your account will be permanently deleted!</td>
+    </tr>
+    <tr>
+      <td>
+        <form method="POST" action="{{ url_for('auth_delete', user_id=current_user.id) }}">
+          <input type="submit" value="Permanently delete my account"/>
+        </form>
+      </td>
+    </tr>
+  </table>
+{% endblock %}
