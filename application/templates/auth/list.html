@@ -4,11 +4,15 @@
   <table>
     <tr>
       <th>Username</th>
+      <th>Number of pokemon</th>
     </tr>
-    {% for user in users %}
+    {% if users_individuals is defined %}
+    {% for user in users_individuals %}
     <tr>
-      <td>{{ user.username }}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.amount}}</td>
     </tr>
     {% endfor %}
+    {% endif %}
   </table>
 {% endblock %}

@@ -56,10 +56,11 @@ def auth_delete(user_id):
 
     return redirect(url_for("index"))
 
-@app.route("/auth/index", methods=["GET"])
+#@app.route("/auth/index", methods=["GET"])
+@app.route("/auth/index")
 @login_required
 def auth_index():
-    return render_template("auth/list.html", users = User.query.all())
+    return render_template("auth/list.html", users_individuals=User.find_number_of_individuals())
 
 @app.route("/auth/edit/password", methods=["POST"])
 @login_required

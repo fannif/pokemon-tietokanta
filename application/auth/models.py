@@ -1,4 +1,5 @@
 from application import db
+from sqlalchemy.sql import text
 
 class User(db.Model):
 
@@ -25,3 +26,17 @@ class User(db.Model):
 
     def is_authenticated(self):
         return True
+
+
+    @staticmethod
+    def find_number_of_individuals():
+        stmt = text("SELECT Account.username, COUNT(Individual.id) FROM Individual"
+	 	    " LEFT JOIN Account ON Individual.account_id = Account.id"
+		    " GROUP BY Account.username")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"username":row[0], "amount":row[1]})
+
+        return response
