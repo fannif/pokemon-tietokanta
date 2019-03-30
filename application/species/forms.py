@@ -1,11 +1,11 @@
 from application import db
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField
+from wtforms import StringField, BooleanField, validators
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from application.types.models import Type
 
 class SpeciesForm(FlaskForm):
-    name = StringField("Pokemon species name")
+    name = StringField("Pokemon species name", [validators.Length(min=3)])
     description = StringField("Describe this species")
     legendary = BooleanField("Is it a legendary pokemon?")
 

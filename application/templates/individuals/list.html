@@ -5,6 +5,7 @@
     <tr>
       <th>Individual</th>
       <th>Level</th>
+      <th>Species</th>
       <th>Favourite</th>
       <th></th>
     </tr>
@@ -12,6 +13,7 @@
     <tr>
       <td>{{ individual.nickname }}</td>
       <td>{{ individual.level }}</td>
+      <td>{{ individual.get_species(individual) }}</td>
       <td>{{ individual.favourite }}</td>
       <td>
         <form method="POST" action="{{ url_for('individuals_set_favourite', individual_id=individual.id) }}">

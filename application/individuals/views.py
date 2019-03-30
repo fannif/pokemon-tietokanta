@@ -51,7 +51,7 @@ def individuals_create():
     if not form.validate():
         return render_template("individuals/new.html", form = form)
 
-    species = Species.query.filter_by(name=form.species.data).first()
+    species = Species.query.filter_by(name=form.species.data.lower()).first()
     if not species:
         return render_template("species/new.html", form = SpeciesForm(), error = "This species does not exist yet. Please create it.")
 

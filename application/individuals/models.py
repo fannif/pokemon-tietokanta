@@ -1,4 +1,5 @@
 from application import db
+from sqlalchemy.sql import text
 
 class Individual(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -14,3 +15,15 @@ class Individual(db.Model):
         self.nickname = nickname
         self.level = level
         self.favourite = False
+
+    @staticmethod
+    def get_species(i):
+        stmt = text("SELECT Species.name FROM Species JOIN Individual"
+                    " ON Species.id = Individual.species_id"
+                    " WHERE Individual.id = :id").params(id=i.id)
+        s = db.engine.execute(stmt)
+        species = "null"
+        for row in s:
+            species = row[0]
+
+        return species
