@@ -18,12 +18,12 @@ class Individual(db.Model):
 
     @staticmethod
     def get_species(i):
-        stmt = text("SELECT Species.name FROM Species JOIN Individual"
+        stmt = text("SELECT Species.id, Species.name FROM Species JOIN Individual"
                     " ON Species.id = Individual.species_id"
                     " WHERE Individual.id = :id").params(id=i.id)
         s = db.engine.execute(stmt)
-        species = "null"
+
         for row in s:
-            species = row[0]
+            species = {"id":row[0], "name":row[1]}
 
         return species

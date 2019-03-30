@@ -1,5 +1,6 @@
 from application import db
 from application.types.models import Type
+from sqlalchemy.sql import text
 
 speciestype = db.Table("speciestype", 
         db.metadata,
@@ -21,6 +22,20 @@ class Species(db.Model):
         self.name = name
         self.description = description
         self.legendary = False
+
+    @staticmethod
+    def get_types(s):
+        stmt = text("SELECT Type.name FROM Type JOIN SpeciesType ON Type.id = SpeciesType.type_id"
+                    " JOIN Species ON SpeciesType.species_id = Species.id"
+                    " WHERE Species.id = :id").params(id=s.id)
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"name":row[0]})
+
+        return response
+
 
 class SpeciesType(object):
     def __init__(self, species_id, type_id):

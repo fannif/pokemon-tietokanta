@@ -30,8 +30,8 @@ class User(db.Model):
 
     @staticmethod
     def find_number_of_individuals():
-        stmt = text("SELECT Account.username, COUNT(Individual.id) FROM Individual"
-	 	    " LEFT JOIN Account ON Individual.account_id = Account.id"
+        stmt = text("SELECT Account.username, COUNT(Individual.id) FROM Account"
+	 	    " LEFT JOIN Individual ON Individual.account_id = Account.id"
 		    " GROUP BY Account.username")
         res = db.engine.execute(stmt)
 

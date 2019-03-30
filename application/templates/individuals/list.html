@@ -3,18 +3,18 @@
 {% block body %}
   <table>
     <tr>
-      <th>Individual</th>
-      <th>Level</th>
-      <th>Species</th>
-      <th>Favourite</th>
+      <th style="padding: 10px">Individual</th>
+      <th style="padding: 10px">Level</th>
+      <th style="padding: 10px">Species</th>
+      <th style="padding: 10px">Favourite</th>
       <th></th>
     </tr>
     {% for individual in individuals %}
     <tr>
-      <td>{{ individual.nickname }}</td>
-      <td>{{ individual.level }}</td>
-      <td>{{ individual.get_species(individual) }}</td>
-      <td>{{ individual.favourite }}</td>
+      <td style="padding: 10px">{{ individual.nickname }}</td>
+      <td style="padding: 10px">{{ individual.level }}</td>
+      <td style="padding: 10px"><a href="{{ url_for('species_info', species_id=individual.get_species(individual).id) }}">{{ individual.get_species(individual).name }}</a></td>
+      <td style="padding: 10px">{{ individual.favourite }}</td>
       <td>
         <form method="POST" action="{{ url_for('individuals_set_favourite', individual_id=individual.id) }}">
           <input name="favourite" type="submit" value="Favourite/Unfavourite"/>

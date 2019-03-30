@@ -3,14 +3,14 @@
 {% block body %}
   <table>
     <tr>
-      <th>Username</th>
-      <th>Number of pokemon</th>
+      <th style="padding: 10px">Username</th>
+      <th style="padding: 10px">Number of pokemon</th>
     </tr>
     {% if users_individuals is defined %}
     {% for user in users_individuals %}
     <tr>
-      <td>{{user.username}}</td>
-      <td>{{user.amount}}</td>
+      <td style="padding: 10px">{{user.username}}</td>
+      <td style="padding: 10px 30px">{{user.amount}}</td>
     </tr>
     {% endfor %}
     {% endif %}

@@ -38,3 +38,10 @@ def link(species_id, type_id):
     link = SpeciesType(species_id, type_id)
     db.session.add(link)
     db.session.commit()
+
+@app.route("/species/<species_id>/", methods=["GET"])
+def species_info(species_id):
+    species = Species.query.get(species_id)
+    types = species.get_types(species)
+
+    return render_template("species/info.html", species = species, types = types)

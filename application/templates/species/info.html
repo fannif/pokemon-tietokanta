@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th style="padding: 10px">Pokemon</th>
+      <th style="padding: 10px">Description</th>
+      <th style="padding: 10px">Legendary</th>
+      <th style="padding: 10px">Type</th>
+    </tr>
+    <tr>
+      <td style="padding: 10px">{{ species.name }}</td>
+      <td style="padding: 10px">{{ species.description }}</td>
+      <td style="padding: 10px">{{ species.legendary }}</td>
+      {% if types is defined %}
+      {% for type in types %}
+      <td style="padding: 5px">{{ type.name }}</td>
+      {% endfor %}
+      {% endif %}
+    </tr>
+  </table>
+{% endblock %}
