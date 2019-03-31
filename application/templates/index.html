@@ -4,4 +4,19 @@
   <p>
     Hello! Here you can keep track of all the pokemon you have caught.
   </p>
+
+  {% if all_species is defined %}
+  <p>
+    Current Hall of Fame (Users who have caught every pokemon species in the database):
+  </p>
+
+  <ul>
+    {% for user in all_species %}
+    <li>
+      {{user.username}}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
 {% endblock %}

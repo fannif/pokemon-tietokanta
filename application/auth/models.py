@@ -40,3 +40,19 @@ class User(db.Model):
             response.append({"username":row[0], "amount":row[1]})
 
         return response
+
+
+    @staticmethod
+    def users_with_all_species():
+        stmt = text("SELECT Account.username, COUNT(Species.name) FROM Account"
+                    " LEFT JOIN Individual ON Account.id = Individual.account_id"
+                    " JOIN Species ON Individual.species_id = Species.id"
+                    " GROUP BY Account.username HAVING COUNT(Species.name)"
+                    " = (SELECT COUNT(*) FROM Species)")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"username":row[0]})
+
+        return response
