@@ -1,6 +1,6 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, login_manager
 from application.individuals.models import Individual
 from application.individuals.forms import IndividualForm
 from application.species.models import Species
@@ -20,6 +20,9 @@ def individuals_form():
 @login_required
 def individuals_remove(individual_id):
     i = Individual.query.filter_by(id=individual_id).first()
+    if i.account_id != current_user.id:
+        return login_manager.unauthorized()
+
     db.session.delete(i)
     db.session.commit()
 
@@ -30,6 +33,9 @@ def individuals_remove(individual_id):
 def individuals_set_favourite(individual_id):
 
     i = Individual.query.get(individual_id)
+    if i.account_id != current_user.id:
+        return login_manager.unauthorized()
+
     if i.favourite:
         i.favourite = False
     else:
