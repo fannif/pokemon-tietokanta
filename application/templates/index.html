@@ -1,19 +1,24 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <p>
+  <p style="font-size:2em">
     Hello! Here you can keep track of all the pokemon you have caught.
   </p>
 
   {% if not current_user.is_authenticated %}
-  <p>Please log in or create an account to add and view your pokemon.</p>
+  <p style="font-size:1.5em">Please log in or create an account to add and view your pokemon.</p>
   {% endif %}
 
-  {% if all_species is defined %}
+  <h4>
+    Current Hall of Fame:                                                              
+  </h4>
   <p>
-    Current Hall of Fame (Users who have caught every pokemon species in the database):
+    On the top are the users who have caught every pokemon species in the database. Below are users who have caught legendary pokemon.
   </p>
+  <br></br>
 
+  <h5>Users who have caught every pokemon: </h5>
+  {% if all_species is defined %}
   <ul>
     {% for user in all_species %}
     <li>
@@ -21,6 +26,27 @@
     </li>
     {% endfor %}
   </ul>
+  {% else %}
+  <p>No such users yet</p>
+  {% endif %}
+  <br></br>
+
+  <h5>Users who have legendary pokemon:</h5>
+  {% if legendaries is defined %}
+  <table>
+    <tr>
+      <th>Username</th>
+      <th style="padding: 0 10px">Amount of legendary species caught</th>
+    </tr>
+    {% for user in legendaries %}
+    <tr>
+      <td>{{user.username}}</td>
+      <td style="padding: 0 60px">{{user.amount}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No such users yet</p>
   {% endif %}
 
 {% endblock %}

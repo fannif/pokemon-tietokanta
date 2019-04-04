@@ -56,3 +56,18 @@ class User(db.Model):
             response.append({"username":row[0]})
 
         return response
+
+    @staticmethod
+    def users_with_legendaries():
+        stmt = text("SELECT Account.id, Account.username, COUNT(Species.id) AS amount"
+                    " FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id"
+                    " JOIN Species ON Individual.species_id = Species.id WHERE"
+                    " Species.legendary = 1 GROUP BY Account.id HAVING COUNT(Species.id) > 0"
+                    " ORDER BY COUNT(Species.id) DESC")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"username":row[1], "amount":row[2]})
+
+        return response
