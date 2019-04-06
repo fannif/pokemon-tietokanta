@@ -62,7 +62,7 @@ class User(db.Model):
         stmt = text("SELECT Account.id, Account.username, COUNT(Species.id) AS amount"
                     " FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id"
                     " JOIN Species ON Individual.species_id = Species.id WHERE"
-                    " Species.legendary = 1 GROUP BY Account.id HAVING COUNT(Species.id) > 0"
+                    " Species.legendary = '1' GROUP BY Account.id HAVING COUNT(Species.id) > 0"
                     " ORDER BY COUNT(Species.id) DESC")
         res = db.engine.execute(stmt)
 
