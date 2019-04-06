@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<form method="POST" action="{{ url_for('individuals_search') }}">
+  <p>Search for different pokemon using the fields below. You can only find pokemon that are yours..</p>
+  <table>
+    <tr>
+      <td>
+        {{ form.nickname.label }}
+      </td>
+      <td>
+        {{ form.nickname }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.nickname.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.species.label }}
+      </td>
+      <td>
+        {{ form.species }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.species.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.favourite.label }}
+      </td>
+      <td>
+        {{ form.favourite }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" value="Search for pokemon"/>
+      </td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}

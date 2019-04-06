@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('individuals_edit', individual_id=individual.id) }}">
+  <table>
+    <tr>
+      <td>
+        {{ form.nickname.label }}
+      </td>
+      <td>
+        {{ form.nickname(value=individual.nickname) }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.nickname.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.level.label }}
+      </td>
+      <td>
+        {{ form.level(value=individual.level) }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.level.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <input type="submit" value="Save changes"/>
+      </td>
+    </tr>
+</form>
+{% endblock %}

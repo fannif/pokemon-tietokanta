@@ -2,7 +2,7 @@ from application import app, db
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user, login_manager
 from application.individuals.models import Individual
-from application.individuals.forms import IndividualForm
+from application.individuals.forms import IndividualForm, EditIndividualForm, SearchIndividualForm
 from application.species.models import Species
 from application.species.forms import SpeciesForm
 
@@ -44,10 +44,70 @@ def individuals_set_favourite(individual_id):
 
     return redirect(url_for("individuals_index"))
 
-#@app.route("individuals/edit/<individual_id>/", methods=["POST"])
-#@login_required
-#def individuals_edit(individual_id):
-    #########
+@app.route("/individuals/show/<individual_id>/", methods=["GET"])
+@login_required
+def individuals_show(individual_id):
+    i = Individual.query.get(individual_id)
+    if i.account_id != current_user.id:
+        return login_manager.unauthorized()
+
+    return render_template("individuals/edit.html", individual=i, form=EditIndividualForm())
+
+@app.route("/individuals/edit/<individual_id>/", methods=["POST"])
+@login_required
+def individuals_edit(individual_id):
+    i = Individual.query.get(individual_id)
+    if i.account_id != current_user.id:
+        return login_manager.unauthorized()
+
+    form = EditIndividualForm(request.form)
+    
+    if not form.validate():
+        return render_template("individuals/edit.html", form=form, individual=i)
+
+    i.nickname = form.nickname.data
+    i.level = form.level.data
+    
+    db.session.commit()
+    
+    return redirect(url_for("individuals_index"))
+
+@app.route("/individuals/searchpage/", methods=["GET"])
+@login_required
+def individuals_searchform():
+    return render_template("individuals/search.html", form=SearchIndividualForm())
+
+@app.route("/individuals/search/", methods=["POST"])
+@login_required
+def individuals_search():
+    form = SearchIndividualForm(request.form)
+
+    if not form.validate():
+        return render_template("individuals/edit.html", form=form)
+
+    n = form.nickname.data
+    s = form.species.data.lower()
+    f = form.favourite.data
+
+    if s:
+        species = Species.query.filter_by(name=s).first()
+
+    if n and s and f:
+        individuals = Individual.query.filter_by(account_id=current_user.id, nickname=n, favourite=f, species_id=species.id)
+    elif n and f:
+        individuals = Individual.query.filter_by(account_id=current_user.id, nickname=n, favourite=f)
+    elif s and f:
+        individuals = Individual.query.filter_by(account_id=current_user.id, species_id=species.id, favourite=f)
+    elif n and s:
+        individuals = Individual.query.filter_by(account_id=current_user.id, nickname=n, species_id=species.id)
+    elif n:
+        individuals = Individual.query.filter_by(account_id=current_user.id, nickname=n)
+    elif s:
+        individuals = Individual.query.filter_by(account_id=current_user.id, species_id=species.id)
+    else:
+        individuals = Individual.query.filter_by(account_id=current_user.id, favourite=f)
+
+    return render_template("individuals/list.html", individuals = individuals)
 
 @app.route("/individuals/", methods=["POST"])
 @login_required

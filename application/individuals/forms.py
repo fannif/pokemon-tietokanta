@@ -9,3 +9,18 @@ class IndividualForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+class EditIndividualForm(FlaskForm):
+    nickname = StringField("Pokemon's nickname", [validators.Length(min=1)])
+    level = IntegerField("Level", [validators.NumberRange(1, 100)])
+
+    class Meta:
+        csrf = False
+
+class SearchIndividualForm(FlaskForm):
+    nickname = StringField("Nickname")
+    species = StringField("Species")
+    favourite = BooleanField("Include only favourite pokemon")
+
+    class Meta:
+        csrf = False
