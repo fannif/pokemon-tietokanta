@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
 
 {% block body %}
+  <p>Order by: 
+    <a href="{{ url_for('individuals_order', order='nickname') }}">Nickname</a>
+    <a href="{{ url_for('individuals_order', order='level') }}">Level</a>
+    <a href="{{ url_for('individuals_order', order='date_caught') }}">Date added</a>
+  </p>
   <table>
     <tr>
       <th style="padding: 10px">Individual</th>

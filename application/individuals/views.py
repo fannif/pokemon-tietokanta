@@ -11,6 +11,18 @@ from application.species.forms import SpeciesForm
 def individuals_index():
     return render_template("individuals/list.html", individuals = Individual.query.filter_by(account_id = current_user.id))
 
+@app.route("/individuals/order/<order>/", methods=["GET"])
+@login_required
+def individuals_order(order):
+    if order == "nickname":
+        individuals = Individual.query.filter_by(account_id=current_user.id).order_by(Individual.nickname)
+    elif order == "level":
+        individuals = Individual.query.filter_by(account_id=current_user.id).order_by(Individual.level)
+    else:
+        individuals = Individual.query.filter_by(account_id=current_user.id).order_by(Individual.date_caught)
+
+    return render_template("individuals/list.html", individuals = individuals)
+
 @app.route("/individuals/new/")
 @login_required
 def individuals_form():
