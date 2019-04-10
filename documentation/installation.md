@@ -23,7 +23,7 @@ Sovelluksen käyttöönottamiseksi Herokussa suorita ensin kohdan "Sovelluksen p
 
 Heroku tarvitsee sovelluksen riippuvuudet, joten samassa kasiossa ajetaan komento pip freeze > requirements.txt. Avaa sen jälkeen luotu requirements.txt -tiedosto haluamassasi tekstieditorissa, ja poista sieltä rivi pkg-resources==0.0.0. Aja vielä tämän jälkeen komento echo "web: gunicorn --preload --workers 1 hello:app" > Procfile.
 
-Kun kyseiset komennot on suoritettu, kirjaudu komentoriviltä sisään Herokuun. Tämän jälkeen aja komento heroku create pokemon-database. Lisää vielä versionhallinnalle tieto Herokusta komennolla git remote add heroku https<i></i>://git<i></i>.heroku.<i></i>com/pokemon-database.git Lopuksi lähetä sovellus Herokuun seuraavalla komentosarjalla:
+Kun kyseiset komennot on suoritettu, kirjaudu komentoriviltä sisään Herokuun. Tämän jälkeen aja komento heroku create pokemon-database. Lisää vielä versionhallinnalle tieto Herokusta komennolla git remote add heroku https<i></i>://git<i></i>.heroku.<i></i>com/pokemon-database.git. Lopuksi lähetä sovellus Herokuun seuraavalla komentosarjalla:
 git add .
 git commit -m "Sovellus siirretty Herokuun"
 git push heroku master
