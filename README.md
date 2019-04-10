@@ -10,6 +10,12 @@ Testikäyttäjän käyttäjänimi: user1
 
 Testikäyttäjän salasana: password
 
+##### Sovelluksen asennusohje:
+[Asennusohje ja käyttöönotto](/documentation/installation.md)
+
+##### Sovelluksen käyttöohje:
+[Käyttöohje](/documentation/operations_guide.md)
+
 ##### Käyttötapaukset:
 [Sovelluksen käyttötapaukset](/documentation/usecases.md)
 

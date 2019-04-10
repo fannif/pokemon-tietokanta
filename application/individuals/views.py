@@ -116,7 +116,7 @@ def individuals_search():
         individuals = Individual.query.filter_by(account_id=current_user.id, nickname=n)
     elif s:
         individuals = Individual.query.filter_by(account_id=current_user.id, species_id=species.id)
-    else:
+    elif f:
         individuals = Individual.query.filter_by(account_id=current_user.id, favourite=f)
 
     return render_template("individuals/list.html", individuals = individuals)
