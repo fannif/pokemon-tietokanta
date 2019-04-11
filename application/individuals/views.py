@@ -95,7 +95,7 @@ def individuals_search():
     form = SearchIndividualForm(request.form)
 
     if not form.validate():
-        return render_template("individuals/edit.html", form=form)
+        return render_template("individuals/search.html", form=form)
 
     n = form.nickname.data
     s = form.species.data.lower()
@@ -118,6 +118,8 @@ def individuals_search():
         individuals = Individual.query.filter_by(account_id=current_user.id, species_id=species.id)
     elif f:
         individuals = Individual.query.filter_by(account_id=current_user.id, favourite=f)
+    else:
+        individuals = Individual.query.filter_by(account_id=current_user.id)
 
     return render_template("individuals/list.html", individuals = individuals)
 
