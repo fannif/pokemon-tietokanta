@@ -2,12 +2,14 @@
 
 {% block body %}
 <form method="POST" action="{{ url_for('species_create') }}">
+  {% if taskbar == 'False' %}
   <p>
      Oops! This species of your pokemon does not exist yet in our database. Please tell us more about it.
   </p>
   <p>
      You will have to restart filling the previous form to add your new pokemon after adding this new pokemon species.
   </p>
+  {% endif %}
   <table>
     <tr>
       <td>

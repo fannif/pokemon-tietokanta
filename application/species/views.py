@@ -15,7 +15,7 @@ def species_create():
     form = SpeciesForm(request.form)
 
     if not form.validate():
-        return render_template("species/new.html", form = form)
+        return render_template("species/new.html", taskbar='False', form = form)
 
     s = Species(form.name.data.lower(), form.description.data)
     s.legendary = form.legendary.data

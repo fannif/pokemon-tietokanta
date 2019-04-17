@@ -63,7 +63,9 @@ def individuals_show(individual_id):
     if i.account_id != current_user.id:
         return login_manager.unauthorized()
 
-    return render_template("individuals/edit.html", individual=i, form=EditIndividualForm())
+    species = Species.query.get(i.species_id)
+
+    return render_template("individuals/edit.html", individual=i, species=species, form=EditIndividualForm())
 
 @app.route("/individuals/edit/<individual_id>/", methods=["POST"])
 @login_required
@@ -73,12 +75,17 @@ def individuals_edit(individual_id):
         return login_manager.unauthorized()
 
     form = EditIndividualForm(request.form)
+
+    species = Species.query.get(i.species_id)
     
     if not form.validate():
-        return render_template("individuals/edit.html", form=form, individual=i)
+        return render_template("individuals/edit.html", form=form, individual=i, species=species)
+
+    species = Species.query.filter_by(name=form.species.data.lower()).first()
 
     i.nickname = form.nickname.data
     i.level = form.level.data
+    i.species_id = species.id
     
     db.session.commit()
     
@@ -133,7 +140,7 @@ def individuals_create():
 
     species = Species.query.filter_by(name=form.species.data.lower()).first()
     if not species:
-        return render_template("species/new.html", form = SpeciesForm(), error = "This species does not exist yet. Please create it.")
+        return render_template("species/new.html", form = SpeciesForm(), taskbar='False', error = "This species does not exist yet. Please create it.")
 
     n = form.nickname.data
     l = form.level.data

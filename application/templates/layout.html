@@ -25,6 +25,9 @@
               <a class="nav-link" href="{{ url_for('individuals_searchform') }} ">Search pokemon</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('species_form', taskbar='True') }} ">Add new species</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ url_for('auth_index') }} ">View user list</a>
             </li>
             {% endif %}
