@@ -13,14 +13,14 @@ Pokemonyksilöilläni on ainakin lempinimi ja level, ja nappaamispäivämäärä
 Pokemonlajilla on nimi ja kuvaus sekä tieto siitä, onko se legendaarinen pokemon.
 Pokemonin tyypillä on nimi.
 
-Käyttäjänä haluan pystyä näkemään, kuinka monta pokemonia muut käyttäjät ovat napanneet. Myös jonkinlainen tieto parhaista käyttäjistä olisi näkyvillä (esimerkiksi legendaaristen pokemonien omistajat sekä kaikki pokemonlajit napanneet käyttäjät).
+Käyttäjänä haluan pystyä näkemään, kuinka monta pokemonia muut käyttäjät ovat napanneet. Myös jonkinlainen tieto parhaista käyttäjistä olisi näkyvillä (esimerkiksi legendaaristen pokemonien omistajat ja heidän legendaaristen pokemonlajiensa määrä sekä kaikki tunnetut pokemonlajit napanneet käyttäjät).
 
 Sovelluksessa on siis seuraavanlaisia toimintoja:
 - Käyttäjällä olevien pokemonien hakeminen nimen, lajin tai suosikkistatuksen (pelkästään suosikit tai kaikki yksilöt) perusteella.
 - Pokemonien listaaminen nimen, levelin tai päivämäärän mukaan järjestyksessä.
 - Uusien pokemonien ja pokemonlajien lisääminen.
 - Käyttäjien pokemonmäärien listaaminen käyttäjittäin.
-- Legendaarisia pokemoneja napanneiden käyttäjien listaaminen.
+- Legendaarisia pokemoneja napanneiden käyttäjien ja heidän legendaaristen pokemonlajiensa määrän listaaminen.
 - Kaikki pokemonlajit napanneiden käyttäjien listaaminen.
 - Pokemonin kehittyminen (pokemonin lajia muutetaan).
 - Pokemonin lempinimen, levelin sekä suosikkistatuksen muuttaminen, ja pokemonin poistaminen.
@@ -67,3 +67,14 @@ Koska lajin ja tyypin välillä on monen suhde moneen -tyyppinen yhteys, on niid
 
 ##### Tyyppien lisääminen:
 Tyyppien lisääminen ei kuulu käyttäjälle näkyviin toiminnallisuuksiin. Se kuitenkin tehdään, mikäli Type-taulu on tyhjä, kyselyllä "INSERT INTO Type (name) VALUES ("tyyppi");". Tässä tyyppi korvataan vuorotellen kaikkien 18:n pokemontyypin nimillä.
+
+##### Pokemonien määrien listaaminen käyttäjittäin:
+Käyttäjäkohtaiset pokemonmäärät listataan kyselyllä SELECT Account.username, COUNT(Individual.id) FROM Account LEFT JOIN Individual ON Individual.account_id = Account.id GROUP BY Account.username;
+
+##### Legendaarisia pokemoneja napanneiden käyttäjien ja legendaaristen lajien määrien listaaminen:
+Käyttäjät, joilla on vähintään yksi legendaarinen pokemon, ja heidän legendaaristen lajiensa määrä listataan seuraavalla kyselyllä (järjestyksessä eniten legendaarisia napanneesta alaspäin): 
+"SELECT Account.id, Account.username, COUNT(Species.id) AS amount FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id JOIN Species ON Individual.species_id = Species.id WHERE Species.legendary = '1' GROUP BY Account.id HAVING COUNT(Species.id) > 0 ORDER BY COUNT(Species.id) DESC;
+
+##### Kaikki pokemonlajit napanneiden käyttäjien listaaminen:
+Kaikki tietokannassa olevat pokemonlajit napanneiden käyttäjien listaaminen tapahtuu kyselyllä "SELECT Account.username, COUNT(Species.name) FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id JOIN Species ON Individual.species_id = Species.id GROUP BY Account.username HAVING COUNT(Species.name) = (SELECT COUNT(*) FROM Species)";
+
