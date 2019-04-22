@@ -78,3 +78,29 @@ Käyttäjät, joilla on vähintään yksi legendaarinen pokemon, ja heidän lege
 ##### Kaikki pokemonlajit napanneiden käyttäjien listaaminen:
 Kaikki tietokannassa olevat pokemonlajit napanneiden käyttäjien listaaminen tapahtuu kyselyllä "SELECT Account.username, COUNT(Species.name) FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id JOIN Species ON Individual.species_id = Species.id GROUP BY Account.username HAVING COUNT(Species.name) = (SELECT COUNT(*) FROM Species)";
 
+##### Pokemonyksilön tietojen muokkaaminen:
+Alla merkitään käsiteltävän yksilön id:tä yksilon_id.
+
+Pokemonin suosikkistatuksen muuttaminen: "UPDATE Individual SET favourite=1 WHERE Individual.id = yksilon_id;". Tässä oletetaan, että suosikkistatus muutettiin arvoon true. Jos yksilö haluttaisiin poistaa suosikeista, niin ykkösen tilalla olisi 0.
+
+Pokemonin lempinimen muuttaminen: UPDATE Individual SET nickname = "uusi_lempinimi" WHERE Individual.id = yksilon_id;
+
+Pokemonin levelin muuttaminen: UPDATE Individual SET level = uusi_level WHERE Individual.id = yksilon_id;
+
+Pokemonin lajin muuttaminen (siis käytännössä pokemonin kehittyminen) tapahtuu sillä tavalla vastaavasti kuin yksilöä lisättäessä, että jos uusi laji on tietokannassa, niin ensin selvitetään lomakkeeseen kirjoitetun lajin nimen perusteella laji id kyselyllä "SELECT id FROM Species WHERE name = "laji";". Merkitään saatua id:tä lajin_id. Jos lajia ei ole tietokannassa, lisätään laji ensin ylläolevan lajin lisäämiseen liittivän kohdan kyselyiden mukaisesti. 
+
+Kun uuden lajin id on selvillä, pokemonin lajia muutetaan kyselyllä UPDATE Individual SET species_id = lajin_id WHERE Individual.id = yksilon_id;
+
+Jos monen sarakkeen arvo muutetaan kerralla, yhdistetään edellisiä kyselyitä. Esimerkiksi lempinimen ja levelin muuttaminen kerralla tehtäisiin kyselyllä UPDATE Individual SET nickname = "uusi_lempinimi", level = uusi_level WHERE Individual.id = yksilon_id;
+
+##### Pokemonyksilön poistaminen:
+Pokemonyksilö poistetaan kyselyllä "DELETE FROM Individual WHERE id = yksilon_id;". Tässäkin yksilon_id kuvaa poistettavan yksilön id:tä.
+
+##### Käyttäjätilin luominen:
+Uusi käyttäjätili luodaan kyselyllä "INSERT INTO Account (username, password) VALUES ("kayttajanimi", "salasana");". Tässä käyttäjänimen kohdalle laitetaan lomakkeesta saatava käyttäjänimi ja salasanan kohdalle salasana. Ennen käyttäjän luomista varmistetaan kuitenkin, ettei käyttäjänimi ole jo varattu. Tämä tehdään hyödyntäen kyselyä "SELECT * FROM Account WHERE username = "kayttajanimi";".
+
+##### Käyttäjän salasanan vaihtaminen:
+Käyttäjän salasana vaihdetaan kyselyllä "UPDATE Account SET password = "uusi_salasana" WHERE id = kayttajan_id;". Tässä uusi_salasana korvattaisiin lomakkeesta saadulla uudella salasanalla ja kayttajan_id muokattavan käyttäjän id:llä.
+
+##### Käyttäjätilin poistaminen:
+Käyttäjätilin poistaminen onnistuu kyselyllä "DELETE FROM Account WHERE id = kayttajan_id;", missä kayttajan_id on poistettavan käyttäjän id.
