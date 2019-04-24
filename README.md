@@ -19,8 +19,11 @@ Testikäyttäjän salasana: password
 ##### Käyttötapaukset:
 [Sovelluksen käyttötapaukset](/documentation/usecases.md)
 
-##### Tietokantakaavion luonnos:
+##### Tietokantakaavio:
 [Tietokantakaavio](/documentation/databaseDiagram.png)
+
+##### Tietokannan tekstimuotoinen kuvaus:
+[Tietokannan kuvaus](/documentation/databaseDescription.md)
 
 
 
