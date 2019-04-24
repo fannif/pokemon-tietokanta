@@ -65,7 +65,6 @@ def auth_delete(user_id):
 
     return redirect(url_for("index"))
 
-#@app.route("/auth/index", methods=["GET"])
 @app.route("/auth/index")
 @login_required
 def auth_index():
@@ -80,7 +79,8 @@ def auth_change_password():
         return render_template("auth/info.html", form = form)
 
     u = current_user
-    u.password = form.password.data
+    password_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+    u.password = password_hash
 
     db.session().commit()
 

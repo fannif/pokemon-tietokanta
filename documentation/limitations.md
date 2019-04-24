@@ -10,8 +10,6 @@ Sovelluksessa ei ole erikseen järjestelmänvalvojia. Näin ollen kukaan ei tois
 
 Toistaiseksi sovelluksessa ei myöskään aina välttämättä käsitellä hyvin pitkiä listauksia järkevästi. Olisi fiksua, että pitkissä listoissa lista olisi jaettu useammalle sivulle. Tähän oli kuitenkin yrityksistä huolimatta vaikea löytää toimivia ohjeita.
 
-Myöskään salasanoja ei tässä vaiheessa kryptata. Niin olisi kuitenkin hyvä tehdä.
-
 Sovellukseen kaavailtiin alunperin mahdollisuutta hakea pokemonyksilöitä myös sen mukaan, ovatko ne legendaarisia. Toiminnallisuus päätettiin kuitenkin jättää pois, koska haussa oli jo vastaavalla tavalla toimiva haku suosikkistatuksen perusteella.
 
 Sovellukseen olisi myös voinut olla hyvä lisätä enemmänkin asiaa käyttäjän tiedot näyttävälle Account info -sivulle. Alkuperäisiin ideoihin kuului esimerkiksi, että kyseiselle sivulle voitaisiin laittaa käyttäjän pokemonien kokonaismäärä ja legendaaristen määrä. Kuitenkin nämä toiminnallisuudet tuntuivat melko turhilta, joten ne päätettiin jättää pois.
