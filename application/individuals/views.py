@@ -6,7 +6,7 @@ from application.individuals.forms import IndividualForm, EditIndividualForm, Se
 from application.species.models import Species
 from application.species.forms import SpeciesForm
 
-@app.route("/individuals", methods=["GET"])
+@app.route("/individuals/", methods=["GET"])
 @login_required
 def individuals_index():
     return render_template("individuals/list.html", individuals = Individual.query.filter_by(account_id = current_user.id))
