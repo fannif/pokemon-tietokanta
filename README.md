@@ -20,7 +20,7 @@ Testikäyttäjän salasana: password
 [Sovelluksen käyttötapaukset](/documentation/usecases.md)
 
 ##### Tietokantakaavion luonnos:
-[Tietokantakaavio](/documentation/dbdiagram.png)
+[Tietokantakaavio](/documentation/databaseDiagram.png)
 
 
 

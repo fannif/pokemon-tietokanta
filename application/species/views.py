@@ -5,12 +5,15 @@ from application.species.models import SpeciesType
 from application.species.forms import SpeciesForm 
 from application.individuals.forms import IndividualForm 
 from flask import render_template, request, redirect, url_for
+from flask_login import login_required, login_manager
 
 @app.route("/species/new/")
+@login_required
 def species_form():
     return render_template("species/new.html", form = SpeciesForm())
 
 @app.route("/species/", methods=["POST"])
+@login_required
 def species_create():
     form = SpeciesForm(request.form)
 
