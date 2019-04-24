@@ -25,6 +25,9 @@ Testikäyttäjän salasana: password
 ##### Tietokannan tekstimuotoinen kuvaus:
 [Tietokannan kuvaus](/documentation/databaseDescription.md)
 
+##### Sovelluksen rajoitteet ja puuttuvat toiminnallisuudet:
+[Rajoitteet ja puuttuvat toiminnallisuudet](/documentation/limitations.md)
+
 
 
 
