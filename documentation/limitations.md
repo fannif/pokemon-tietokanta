@@ -4,6 +4,8 @@ Sovelluksessa on käytön kannalta pieniä rajoitteita. Esimerkiksi tilanne, jos
 
 Pokemonyksilöiden haku päätettiin toteuttaa niin, että esimerkiksi lempinimellä hakiessa haetaan täsmälleen kyseistä lempinimeä. Tämä kuitenkin rajoittaa hiukan hakumahdollisuuksia, koska usein hauissa haetaan niin, että riittää, että sana sisältää haettavan merkkijonon. Tämän sovelluksen tapauksessa kuitenkin näytetään vain ne yksilöt joiden lempinimi on täsmälleen sama, kuin kirjoitettu merkkijono (paitsi jos merkkijono on tyhjä, jolloin haetaan kaikki lempinimet).
 
+Käyttäjän poistamiseen liittyy myös pieni laajassa käytössä mahdollisesti ongelmaksi muodostuva seikka. Kun käyttäjä poistetaan, ei hänen lisäämiä yksilöitään kuitenkaan poisteta. Kukaan muu ei kuitenkaan käytä tai tarvitse kyseisiä yksilöitä. Näin ollen suuressa käytössä käyttäjiä poistaessa tietokantaa kerääntyy turhaa dataa, joka vie tilaa.
+
 Sovelluksesta päätettiin tietoisesti jättää pois mahdollisuus pokemonlajien listaamiseen siltä varalta, että joku käyttäjä lisäisi lajiksi jotain loukkaavaa. Tällä järjestelyllä toiset käyttäjät eivät joutuisi näkemään luokkaavaa lajia. Kuitenkin tästä aiheutuu pienni rajoite. Etusivulla on listattuna käyttäjät, jotka ovat saaneet kaikki pokemonit. Kuitenkin koska kaikkia lajeja ei voi nähdä mistään, voi halukkaan olla vaikea päästä listalle, kun ei tiedä, mitä kaikkia lajeja tietokannassa on.
 
 Sovelluksessa ei ole erikseen järjestelmänvalvojia. Näin ollen kukaan ei toistaiseksi voi esimerkiksi poistaa häirköiviä käyttjiä tai virheellisiä pokemonlajeja. Järjestelmänvalvojien lisääminen tulevaisuudessa olisi kuitenkin melko suoraviivaista.
