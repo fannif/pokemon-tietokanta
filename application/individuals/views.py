@@ -5,11 +5,24 @@ from application.individuals.models import Individual
 from application.individuals.forms import IndividualForm, EditIndividualForm, SearchIndividualForm
 from application.species.models import Species
 from application.species.forms import SpeciesForm
+from flask_paginate import Pagination, get_page_parameter
 
 @app.route("/individuals/", methods=["GET"])
 @login_required
 def individuals_index():
-    return render_template("individuals/list.html", individuals = Individual.query.filter_by(account_id = current_user.id))
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    individuals = Individual.query.filter_by(account_id=current_user.id)
+
+    i = (page-1)*10
+    individuals_paginated = individuals[i:i+10]
+
+    pagination = Pagination(page=page, total=individuals.count(), search=search, record_name='individuals', per_page = 10, css_framework='bootstrap4')
+
+    return render_template("individuals/list.html", individuals = individuals_paginated, pagination=pagination)
 
 @app.route("/individuals/order/<order>/", methods=["GET"])
 @login_required
@@ -21,7 +34,18 @@ def individuals_order(order):
     else:
         individuals = Individual.query.filter_by(account_id=current_user.id).order_by(Individual.date_caught)
 
-    return render_template("individuals/list.html", individuals = individuals)
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+
+    i = (page-1)*10
+    individuals_paginated = individuals[i:i+10]
+
+    pagination = Pagination(page=page, total=individuals.count(), search=search, record_name='individuals', per_page = 10, css_framework='bootstrap4')
+
+    return render_template("individuals/list.html", individuals = individuals_paginated, pagination=pagination)
 
 @app.route("/individuals/new/")
 @login_required
@@ -96,7 +120,7 @@ def individuals_edit(individual_id):
 def individuals_searchform():
     return render_template("individuals/search.html", form=SearchIndividualForm())
 
-@app.route("/individuals/search/", methods=["POST"])
+@app.route("/individuals/search/", methods=["POST", "GET"])
 @login_required
 def individuals_search():
     form = SearchIndividualForm(request.form)
@@ -128,7 +152,18 @@ def individuals_search():
     else:
         individuals = Individual.query.filter_by(account_id=current_user.id)
 
-    return render_template("individuals/list.html", individuals = individuals)
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+
+    i = (page-1)*10
+    individuals_paginated = individuals[i:i+10]
+
+    pagination = Pagination(page=page, total=individuals.count(), search=search, record_name='individuals', per_page = 10, css_framework='bootstrap4')
+
+    return render_template("individuals/list.html", individuals = individuals_paginated, pagination=pagination)
 
 @app.route("/individuals/", methods=["POST"])
 @login_required

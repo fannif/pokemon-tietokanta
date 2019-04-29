@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
+  <p style="padding: 20px 0px 0px 0px">{{ pagination.info }}</p>
   <table>
     <tr>
       <th style="padding: 10px">Username</th>
@@ -15,4 +16,5 @@
     {% endfor %}
     {% endif %}
   </table>
+  <p style="padding: 10px 0px">{{ pagination.links }}</p>
 {% endblock %}

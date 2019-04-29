@@ -3,6 +3,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 
 from flask_bcrypt import Bcrypt
 
+from flask_paginate import Pagination, get_page_parameter
+
 from application import app, db
 from application.auth.models import User
 from application.auth.forms import LoginForm, NewAccountForm, AccountInfoForm
@@ -68,7 +70,20 @@ def auth_delete(user_id):
 @app.route("/auth/index")
 @login_required
 def auth_index():
-    return render_template("auth/list.html", users_individuals=User.find_number_of_individuals())
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+
+    users_individuals = User.find_number_of_individuals()
+
+    i = (page-1)*10
+    users_paginated = users_individuals[i:i+10]
+
+    pagination = Pagination(page=page, total=len(users_individuals), search=search, record_name='users', per_page = 10, css_framework='bootstrap4')
+
+    return render_template("auth/list.html", users_individuals=users_paginated, pagination=pagination)
 
 @app.route("/auth/edit/password", methods=["POST"])
 @login_required

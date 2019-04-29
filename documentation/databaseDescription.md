@@ -7,10 +7,12 @@ Account-taulu sisältää sovelluksen käyttjien tiedot. Kukin rivi kuvaa yhtä 
 
 Account-taulua ei ole denormalisoitu. Denormalisointia ei koettu taululle tarpeelliseksi.
 
+Account-taulu on toinen sovelluksen CRUD-tauluista. Account-taulun rivejä voi nimittäin muokata sovelluksessa salasanaa vaihtamalla, ja taulun riveistä löytyy myös listaus, tietojenkatselu ja poistomahdollisuus.
+
 #### Individual
 Individual-taulun kukin rivi sisältää yhden pokemonyksilön tiedon. Rivissä on kokonaislukumuotoinen pääavain sekä viiteavaimet yksilön omistavaan käyttäjään ja yksilön lajiin. Näiden lisäksi rivillä on merkkijonomuotoinen lempinimi (nickname), kokonaisluku taso (level), totuusarvo suosikki (favourite) ja lisäyspäivämäärä (date_caught). Favourite kuvaa sitä, kuuluuko yksilö käyttäjän suosikeihin vai ei. Lempinimeä ja tasoa käytetään yksilön kuvaamiseen. Lisäyspäivämäärää käytetään yksilöiden järjesteämisessä.
 
-Myöskään Individual-taulua ei olla denormalisoitu.
+Myöskään Individual-taulua ei olla denormalisoitu. Se on toinen sovelluksen CRUD-tauluista, sillä käyttäjä voi listata yksilönsä, katsoa niiden tietoja ja muokata ja poistaa niitä.
 
 #### Species
 Species-taulun rivit kuvaavat pokemonlajeja. Yhteen Species-taulun riviin voi liittyä nolla tai useampi Individual-taulun riviä. Lisäksi Species-taulun ja Type-taulun välillä on monen suhde moneen -yhteys, joka on korvattu liitostaululla SpeciesType. Niinpä yhteen Species-taulun riviin voi liittyä yksi tai useampi SpeciesType-taulun rivi.
