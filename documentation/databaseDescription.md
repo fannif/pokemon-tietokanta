@@ -43,7 +43,7 @@ Liitostauluakaan ei ole denormalisoitu. Tauluun on lisätty unikki indeksi viite
 );`
 
 #### Individual
-`CREATE TABLE individual (
+`CREATE TABLE Individual (
 	id INTEGER NOT NULL, 
 	date_caught DATETIME, 
 	nickname VARCHAR(144) NOT NULL, 
@@ -57,7 +57,7 @@ Liitostauluakaan ei ole denormalisoitu. Tauluun on lisätty unikki indeksi viite
 );`
 
 #### Species
-`CREATE TABLE species (
+`CREATE TABLE Species (
 	id INTEGER NOT NULL, 
 	name VARCHAR(144) NOT NULL, 
 	description VARCHAR(512), 
@@ -66,14 +66,14 @@ Liitostauluakaan ei ole denormalisoitu. Tauluun on lisätty unikki indeksi viite
 );`
 
 #### Type
-`CREATE TABLE type (
+`CREATE TABLE Type (
 	id INTEGER NOT NULL, 
 	name VARCHAR(144) NOT NULL, 
 	PRIMARY KEY (id)
 );`
 
 #### SpeciesType
-`CREATE TABLE speciestype (
+`CREATE TABLE SpeciesType (
 	id INTEGER NOT NULL, 
 	species_id INTEGER, 
 	type_id INTEGER, 
