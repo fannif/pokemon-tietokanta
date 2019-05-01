@@ -132,20 +132,24 @@ def individuals_search():
     s = form.species.data.lower()
     f = form.favourite.data
 
+    species = []
+
     if s:
         species = Species.query.filter_by(name=s).first()
 
-    if n and s and f:
+    if s and not species:
+        individuals = Individual.query.filter(0==1)
+    elif n and species and f:
         individuals = Individual.query.filter_by(account_id=current_user.id, nickname=n, favourite=f, species_id=species.id)
     elif n and f:
         individuals = Individual.query.filter_by(account_id=current_user.id, nickname=n, favourite=f)
-    elif s and f:
+    elif species and f:
         individuals = Individual.query.filter_by(account_id=current_user.id, species_id=species.id, favourite=f)
-    elif n and s:
+    elif n and species:
         individuals = Individual.query.filter_by(account_id=current_user.id, nickname=n, species_id=species.id)
     elif n:
         individuals = Individual.query.filter_by(account_id=current_user.id, nickname=n)
-    elif s:
+    elif species:
         individuals = Individual.query.filter_by(account_id=current_user.id, species_id=species.id)
     elif f:
         individuals = Individual.query.filter_by(account_id=current_user.id, favourite=f)
