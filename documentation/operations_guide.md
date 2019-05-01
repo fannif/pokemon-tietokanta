@@ -27,4 +27,4 @@ Pääset muokkaamaan käyttäjätilisi tietoja yläpalkin oikeassa laidassa olev
 Yläpalkin linkistä View user list -näet muiden käyttäjien nappaamien pokemonien määrät.
 
 #### Etusivulle palaaminen
-Etusivulle voit palata klikkaamalla yläpalki linkkiä Back to front page. Siellä näet myös listat käyttäjistä, jotka ovat napanneet kaikki sovelluksen tuntemat pokemonit tai legendaarisia pokemoneja.
+Etusivulle voit palata klikkaamalla yläpalkin linkkiä Back to front page. Siellä näet myös listattuna käyttäjistä enintään kymmenen, jotka ovat napanneet kaikki sovelluksen tuntemat pokemonit, ja enintän kymmenen, joilla on eniten legendaarisia pokemoneja.
