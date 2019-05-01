@@ -72,8 +72,8 @@ Tyyppien lisääminen ei kuulu käyttäjälle näkyviin toiminnallisuuksiin. Se 
 Käyttäjäkohtaiset pokemonmäärät listataan kyselyllä SELECT Account.username, COUNT(Individual.id) FROM Account LEFT JOIN Individual ON Individual.account_id = Account.id GROUP BY Account.username;
 
 ##### Eniten legendaarisia pokemoneja napanneiden käyttäjien ja legendaaristen lajien määrien listaaminen:
-Käyttäjät, joilla on vähintään yksi legendaarinen pokemon, ja heidän legendaaristen lajiensa määrä listataan seuraavalla kyselyllä (järjestyksessä eniten legendaarisia napanneesta alaspäin): 
-"SELECT Account.id, Account.username, COUNT(Species.id) AS amount FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id JOIN Species ON Individual.species_id = Species.id WHERE Species.legendary = '1' GROUP BY Account.id HAVING COUNT(Species.id) > 0 ORDER BY COUNT(Species.id) DESC LIMIT 10;
+Käyttäjistä, joilla on vähintään yksi legendaarinen pokemon, ne joilla on eniten legendaarisia ja heidän legendaaristen lajiensa määrä listataan seuraavalla kyselyllä (järjestyksessä eniten legendaarisia napanneesta alaspäin): 
+"SELECT Account.id, Account.username, COUNT(DISTINCT Species.id) AS amount FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id JOIN Species ON Individual.species_id = Species.id WHERE Species.legendary = '1' GROUP BY Account.id HAVING COUNT(DISTINCT Species.id) > 0 ORDER BY COUNT(DISTINCT Species.id) DESC LIMIT 10;
 
 ##### Kaikki pokemonlajit napanneiden käyttäjien listaaminen:
 Kaikki tietokannassa olevat pokemonlajit napanneiden käyttäjien (enintään kymmenen käyttäjää) listaaminen tapahtuu kyselyllä "SELECT Account.username, COUNT(DISTINCT Species.name) FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id JOIN Species ON Individual.species_id = Species.id GROUP BY Account.username HAVING COUNT(DISTINCT Species.name) = (SELECT COUNT(*) FROM Species) LIMIT 10;"
