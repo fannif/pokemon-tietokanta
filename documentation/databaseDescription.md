@@ -35,15 +35,15 @@ Liitostauluakaan ei ole denormalisoitu. Tauluun on lisätty unikki indeksi viite
 ### CREATE TABLE -lauseet
 
 #### Account
-CREATE TABLE Account (
+`CREATE TABLE Account (
 	id INTEGER NOT NULL, 
 	username VARCHAR(144) NOT NULL, 
 	password VARCHAR(144) NOT NULL, 
 	PRIMARY KEY (id)
-);
+);`
 
 #### Individual
-CREATE TABLE individual (
+`CREATE TABLE individual (
 	id INTEGER NOT NULL, 
 	date_caught DATETIME, 
 	nickname VARCHAR(144) NOT NULL, 
@@ -54,30 +54,30 @@ CREATE TABLE individual (
 	PRIMARY KEY (id),
 	FOREIGN KEY(account_id) REFERENCES account (id), 
 	FOREIGN KEY(species_id) REFERENCES species (id)
-);
+);`
 
 #### Species
-CREATE TABLE species (
+`CREATE TABLE species (
 	id INTEGER NOT NULL, 
 	name VARCHAR(144) NOT NULL, 
 	description VARCHAR(512), 
 	legendary BOOLEAN NOT NULL, 
 	PRIMARY KEY (id)
-);
+);`
 
 #### Type
-CREATE TABLE type (
+`CREATE TABLE type (
 	id INTEGER NOT NULL, 
 	name VARCHAR(144) NOT NULL, 
 	PRIMARY KEY (id)
-);
+);`
 
 #### SpeciesType
-CREATE TABLE speciestype (
+`CREATE TABLE speciestype (
 	id INTEGER NOT NULL, 
 	species_id INTEGER, 
 	type_id INTEGER, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(species_id) REFERENCES species (id), 
 	FOREIGN KEY(type_id) REFERENCES type (id)
-);
+);`
