@@ -15,12 +15,12 @@
     Current Hall of Fame:                                                              
   </h4>
   <p>
-    On the top are the users who have caught every pokemon species in the database. Below are users who have caught legendary pokemon.
+    On the top are some users who have caught every pokemon species in the database. Below are the users with the highest amount of legendary pokemon.
   </p>
   <br></br>
 
   <h5>Users who have caught every pokemon: </h5>
-  {% if all_species is defined %}
+  {% if all_species is defined and all_species %}
   <ul>
     {% for user in all_species %}
     <li>
@@ -34,7 +34,7 @@
   <br></br>
 
   <h5>Users who have legendary pokemon:</h5>
-  {% if legendaries is defined %}
+  {% if legendaries is defined and legendaries %}
   <table>
     <tr>
       <th>Username</th>

@@ -44,11 +44,11 @@ class User(db.Model):
 
     @staticmethod
     def users_with_all_species():
-        stmt = text("SELECT Account.username, COUNT(Species.name) FROM Account"
+        stmt = text("SELECT Account.username, COUNT(DISTINCT Species.name) FROM Account"
                     " LEFT JOIN Individual ON Account.id = Individual.account_id"
                     " JOIN Species ON Individual.species_id = Species.id"
-                    " GROUP BY Account.username HAVING COUNT(Species.name)"
-                    " = (SELECT COUNT(*) FROM Species)")
+                    " GROUP BY Account.username HAVING COUNT(DISTINCT Species.name)"
+                    " = (SELECT COUNT(*) FROM Species) LIMIT 10")
         res = db.engine.execute(stmt)
 
         response = []
@@ -63,7 +63,7 @@ class User(db.Model):
                     " FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id"
                     " JOIN Species ON Individual.species_id = Species.id WHERE"
                     " Species.legendary = '1' GROUP BY Account.id HAVING COUNT(Species.id) > 0"
-                    " ORDER BY COUNT(Species.id) DESC")
+                    " ORDER BY COUNT(Species.id) DESC LIMIT 10")
         res = db.engine.execute(stmt)
 
         response = []
