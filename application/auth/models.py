@@ -59,11 +59,11 @@ class User(db.Model):
 
     @staticmethod
     def users_with_legendaries():
-        stmt = text("SELECT Account.id, Account.username, COUNT(Species.id) AS amount"
+        stmt = text("SELECT Account.id, Account.username, COUNT(DISTINCT Species.id) AS amount"
                     " FROM Account LEFT JOIN Individual ON Account.id = Individual.account_id"
                     " JOIN Species ON Individual.species_id = Species.id WHERE"
-                    " Species.legendary = '1' GROUP BY Account.id HAVING COUNT(Species.id) > 0"
-                    " ORDER BY COUNT(Species.id) DESC LIMIT 10")
+                    " Species.legendary = '1' GROUP BY Account.id HAVING COUNT(DISTINCT Species.id) > 0"
+                    " ORDER BY COUNT(DISTINCT Species.id) DESC LIMIT 10")
         res = db.engine.execute(stmt)
 
         response = []
